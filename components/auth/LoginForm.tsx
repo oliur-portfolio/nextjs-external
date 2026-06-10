@@ -40,8 +40,6 @@ const LoginForm = () => {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const callbackUrl = searchParams.get("callbackUrl");
-
   const form = useForm<LoginFormInput, unknown, LoginFormOutput>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -82,12 +80,6 @@ const LoginForm = () => {
 
       return;
     }
-
-    const session = await getSession();
-
-    const destination = getRedirectUrl(session?.user.role as Role, callbackUrl);
-
-    router.push(destination);
 
     router.refresh();
   }
@@ -185,7 +177,7 @@ const LoginForm = () => {
                 {form.formState.isSubmitting ? "Logging in..." : "Login"}
               </Button>
 
-              <GoogleSignInButton callbackUrl={callbackUrl} />
+              <GoogleSignInButton />
             </Field>
           </form>
 

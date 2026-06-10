@@ -12,9 +12,7 @@ const SignOutButton = () => {
   const handleSignOut = async () => {
     setLoading(true);
     await signOut({ redirect: false });
-    router.push("/");
     router.refresh();
-    setLoading(false);
   };
 
   return (

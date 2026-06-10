@@ -2,15 +2,9 @@ import { FcGoogle } from "react-icons/fc";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 
-interface GoogleSignInButtonProps {
-  callbackUrl?: string | null;
-}
-
-const GoogleSignInButton = ({ callbackUrl }: GoogleSignInButtonProps) => {
+const GoogleSignInButton = () => {
   const handleGoogleSignIn = async () => {
-    await signIn("google", {
-      callbackUrl: callbackUrl ?? "/dashboard",
-    });
+    await signIn("google");
   };
 
   return (

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "./auth";
-import { getRoleHome, type Role } from "@/lib/auth-redirect";
+import { getRedirectUrl, getRoleHome, type Role } from "@/lib/auth-redirect";
 
 const PUBLIC_PATHS = ["/", "/about"];
 const AUTH_PATHS = ["/login", "/register"];
@@ -24,7 +24,11 @@ export default auth(function middleware(req) {
   const role = session?.user?.role as Role | undefined;
 
   if (session && isAuthRoute(path)) {
-    const destination = getRoleHome(role);
+    const rawCallback = req.nextUrl.searchParams.get("callbackUrl");
+    const callbackUrl = rawCallback ? decodeURIComponent(rawCallback) : null;
+
+    const destination = getRedirectUrl(role, callbackUrl);
+
     return NextResponse.redirect(new URL(destination, req.nextUrl.origin));
   }
 

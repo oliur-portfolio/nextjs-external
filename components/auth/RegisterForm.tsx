@@ -30,6 +30,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { FcGoogle } from "react-icons/fc";
+import GoogleSignInButton from "../layout/GoogleSignInButton";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -222,10 +223,7 @@ const RegisterForm = () => {
                   : "Register"}
               </Button>
 
-              <Button type="button" variant="outline">
-                <FcGoogle className="h-5 w-5" />
-                Continue with Google
-              </Button>
+              <GoogleSignInButton />
             </Field>
           </form>
 
